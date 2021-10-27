@@ -1,4 +1,4 @@
-# A Circle Step Sequencer
+# drOOOne
 
 ## Controls
 
