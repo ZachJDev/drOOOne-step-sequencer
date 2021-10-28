@@ -57,13 +57,14 @@ function setup() {
 
 function draw() {
   background(0);
+  let time = 1 / items.length
   items.forEach(item => item.computeFreq())
   items.forEach((item) => {
     let distanceThru = stepVis.x - item.leftBound;
     if (stepVis.x >= item.leftBound && stepVis.x <= item.rightBound) {
       let gain = Math.abs(Math.sin((Math.PI * distanceThru) / item.diameter));
       item.draw(options.strokeCircles, gain);
-      item.play(gain * options.maxGain);
+      item.play(gain * options.maxGain, time);
     } else {
       item.stop();
       item.draw(options.strokeCircles);

@@ -1,9 +1,14 @@
 
-
+let merger = audioCtx.createChannelMerger()
+let masterGain = audioCtx.createGain()
+masterGain.gain.setValueAtTime(.1, audioCtx.currentTime)
+masterGain.connect(audioCtx.destination)
+merger.connect(masterGain)
 class GainManager {
     constructor(context, val = 0.1) {
         this.gain = new GainNode(context, {gain: val})
-        this.gain.connect(context.destination)
+        this.gain.connect(merger)
+        // this.gain.connect(audioCtx.destination)
         this.context = context
     }
     setVal(val) {
@@ -93,9 +98,9 @@ class Circle {
         circle(this.x,this.y, this.diameter);
       }
 
-      play(val) {
-          this.osc.setFreq(this.freq)
-          this.osc.setGain(val)
+      play(val, time) {
+          this.osc.setFreq(this.freq )
+          this.osc.setGain(val, time)
       }
       stop() {
           this.osc.setGain(0)
